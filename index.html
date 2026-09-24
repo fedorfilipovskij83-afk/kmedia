@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-MEDIA</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F4F7FC;
+  --bg2: #E8EFF8;
+  --surface: #FFFFFF;
+  --accent: #3E87CB;
+  --accent-dark: #2A6BAD;
+  --text: #1A2233;
+  --muted: #6B7A99;
+  --border: #D0DCF0;
+  --nav-bg: rgba(255,255,255,0.95);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ====== NAV ====== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 60px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.logo-wrap { display: flex; align-items: center; text-decoration: none; gap: 0; }
+.logo-img { height: 34px; width: auto; display: block; }
+.nav-links { display: flex; gap: 4px; list-style: none; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 7px;
+  transition: color 0.18s, background 0.18s;
+}
+.nav-links a:hover { color: var(--text); background: var(--bg2); }
+.nav-links a.active { color: var(--accent); font-weight: 700; background: rgba(62,135,203,0.08); }
+.nav-cta {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.18s;
+}
+.nav-cta:hover { background: var(--accent-dark); }
+
+/* ====== PAGES ====== */
+.page { display: none; padding-top: 64px; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ====== HOME ====== */
+.hero {
+  background: var(--surface);
+  padding: 80px 60px 72px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -160px; right: -120px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(62,135,203,0.07) 0%, transparent 68%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(62,135,203,0.09);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+}
+.hero h1 {
+  font-size: clamp(52px, 7.5vw, 104px);
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 0;
+}
+.hero h1 .idea {
+  display: block;
+  color: var(--accent);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+.hero-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 52px;
+}
+.hero-desc {
+  max-width: 420px;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.hero-btns { display: flex; gap: 12px; flex-shrink: 0; }
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.18s;
+  white-space: nowrap;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--accent-dark); }
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  padding: 14px 26px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1.5px solid var(--border);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.18s, color 0.18s;
+  white-space: nowrap;
+  display: inline-block;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* что мы делаем — блоки как в оригинале */
+.what-section {
+  padding: 80px 60px;
+  background: var(--bg);
+}
+.what-header {
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+  margin-bottom: 56px;
+}
+.what-header-left { flex-shrink: 0; }
+.what-header-left h2 {
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.what-header-left p { font-size: 14px; color: var(--muted); max-width: 240px; line-height: 1.7; }
+
+/* Grid of service blocks like original screenshot */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--border);
+}
+.svc-block {
+  background: var(--surface);
+  padding: 36px 36px 32px;
+  cursor: pointer;
+  transition: background 0.18s;
+  gap: 0;
+}
+.svc-block:hover { background: #EEF4FC; }
+.svc-block-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.svc-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.svc-dot::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.svc-block h3 {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.svc-block p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 340px;
+}
+
+/* ====== ABOUT ====== */
+.about-hero {
+  background: var(--surface);
+  padding: 72px 60px 64px;
+  border-bottom: 1px solid var(--border);
+}
+.page-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.about-hero h1 {
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  max-width: 720px;
+  margin-bottom: 24px;
+}
+.about-hero > p {
+  max-width: 560px;
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.about-body {
+  padding: 72px 60px;
+}
+.about-cols {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.about-text p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.stat-box {
+  background: var(--surface);
+  padding: 32px 28px;
+}
+.stat-box .num {
+  font-size: 46px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-box .lbl { font-size: 13px; color: var(--muted); font-weight: 500; }
+
+/* ====== SERVICES ====== */
+.services-hero {
+  background: var(--surface);
+  padding: 72px 60px 64px;
+  border-bottom: 1px solid var(--border);
+}
+.services-hero h1 {
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  max-width: 640px;
+  margin-bottom: 20px;
+}
+.services-hero > p {
+  max-width: 500px;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.services-body { padding: 48px 60px 72px; }
+
+.accordion-item { border-bottom: 1px solid var(--border); }
+.accordion-trigger {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 26px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  gap: 24px;
+}
+.acc-left { display: flex; align-items: center; gap: 20px; }
+.acc-num { font-size: 12px; color: var(--muted); font-weight: 700; letter-spacing: 0.1em; min-width: 26px; }
+.acc-title { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.acc-arrow {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s, background 0.18s, border-color 0.18s;
+  font-size: 18px;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1;
+}
+.accordion-item.open .acc-arrow {
+  transform: rotate(45deg);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.accordion-body {
+  display: none;
+  padding: 0 0 28px 46px;
+  max-width: 680px;
+}
+.accordion-item.open .accordion-body { display: block; }
+.accordion-body p { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 12px; }
+.accordion-body p:last-child { margin-bottom: 0; }
+
+/* ====== PROJECTS ====== */
+.projects-hero {
+  background: var(--surface);
+  padding: 72px 60px 64px;
+  border-bottom: 1px solid var(--border);
+}
+.projects-hero h1 {
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+.projects-hero p { font-size: 15px; color: var(--muted); max-width: 480px; line-height: 1.75; }
+
+.carousel-section { padding: 56px 0 80px; }
+.carousel-header {
+  padding: 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+.carousel-header span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.carousel-btns { display: flex; gap: 8px; }
+.cbtn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  color: var(--text);
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+.cbtn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.carousel-wrap { overflow: hidden; padding: 0 60px; }
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.poster-card {
+  flex: 0 0 230px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.22s, box-shadow 0.22s;
+  position: relative;
+}
+.poster-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(0,0,0,0.10); }
+.poster-svg { width: 100%; aspect-ratio: 2/3; display: block; }
+.poster-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 4px;
+}
+.poster-info { padding: 18px 18px 22px; }
+.poster-info .release {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+.poster-info h3 { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 5px; line-height: 1.3; }
+.poster-info p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ====== CONTACT ====== */
+.contact-page {
+  background: var(--surface);
+  padding: 72px 60px 80px;
+  min-height: calc(100vh - 64px);
+}
+.contact-page h1 {
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+.contact-page > .sub {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 56px;
+}
+.contact-cols {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 72px;
+  align-items: start;
+}
+.cinfo-list { display: flex; flex-direction: column; }
+.cinfo-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.18s;
+}
+.cinfo-item:hover { color: var(--accent); }
+.cinfo-icon {
+  width: 40px; height: 40px;
+  border-radius: 9px;
+  background: rgba(62,135,203,0.1);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.cinfo-icon svg { width: 17px; height: 17px; fill: var(--accent); }
+.cinfo-lbl { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+.cinfo-val { font-size: 15px; font-weight: 600; }
+
+/* form */
+.form-wrap { display: flex; flex-direction: column; gap: 16px; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.field input, .field textarea {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  padding: 12px 15px;
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.18s;
+  width: 100%;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 0.6; }
+.field input:focus, .field textarea:focus { border-color: var(--accent); }
+.field textarea { resize: vertical; min-height: 110px; }
+
+/* custom select */
+.select-wrap { position: relative; }
+.select-wrap select {
+  width: 100%;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  padding: 12px 42px 12px 15px;
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.18s;
+}
+.select-wrap select:focus { border-color: var(--accent); }
+.select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--muted);
+  pointer-events: none;
+}
+
+/* file upload */
+.file-upload {
+  border: 1.5px dashed var(--border);
+  border-radius: 9px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  background: var(--bg);
+  position: relative;
+}
+.file-upload:hover { border-color: var(--accent); background: rgba(62,135,203,0.04); }
+.file-upload input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.file-upload-icon { font-size: 24px; margin-bottom: 8px; color: var(--accent); }
+.file-upload p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.file-upload p strong { color: var(--text); font-weight: 600; }
+.file-names { margin-top: 8px; font-size: 12px; color: var(--accent); font-weight: 600; }
+
+/* ====== FOOTER ====== */
+footer {
+  background: #1A2233;
+  padding: 36px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.footer-logo { font-size: 16px; font-weight: 800; color: #fff; text-decoration: none; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.32); }
+.footer-nav { display: flex; gap: 24px; list-style: none; }
+.footer-nav a { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; font-weight: 500; transition: color 0.18s; }
+.footer-nav a:hover { color: rgba(255,255,255,0.9); }
+
+@media (max-width: 860px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero, .about-hero, .services-hero, .projects-hero, .contact-page { padding: 56px 20px 48px; }
+  .what-section, .about-body, .services-body { padding: 48px 20px; }
+  .what-header { flex-direction: column; gap: 24px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .hero-footer { flex-direction: column; align-items: flex-start; }
+  .about-cols { grid-template-columns: 1fr; gap: 40px; }
+  .contact-cols { grid-template-columns: 1fr; gap: 40px; }
+  .frow { grid-template-columns: 1fr; }
+  .carousel-wrap, .carousel-header { padding: 0 20px; }
+  footer { flex-direction: column; text-align: center; padding: 28px 20px; }
+  .footer-nav { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo-wrap" onclick="showPage('home');return false;">
+    <img class="logo-img" src="data:image/png;base64,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" alt="K-Media">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active" id="nav-home" onclick="showPage('home');return false;">Главная</a></li>
+    <li><a href="#" id="nav-about" onclick="showPage('about');return false;">О компании</a></li>
+    <li><a href="#" id="nav-services" onclick="showPage('services');return false;">Услуги</a></li>
+    <li><a href="#" id="nav-projects" onclick="showPage('projects');return false;">Проекты</a></li>
+    <li><a href="#" id="nav-contact" onclick="showPage('contact');return false;">Контакты</a></li>
+  </ul>
+  <a href="#" class="nav-cta" onclick="showPage('contact');return false;">Обсудить проект</a>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-label">Рекламное агентство · Москва</div>
+      <h1>K-Media<span class="idea">has an idea</span></h1>
+      <div class="hero-footer">
+        <p class="hero-desc">Полный цикл рекламных услуг — от стратегии и производства до размещения и контроля результата.</p>
+        <div class="hero-btns">
+          <a href="#" class="btn-primary" onclick="showPage('services');return false;">Наши услуги</a>
+          <a href="#" class="btn-secondary" onclick="showPage('contact');return false;">Написать нам</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="what-section">
+    <div class="what-header">
+      <div class="what-header-left">
+        <h2>Чем мы<br>занимаемся?</h2>
+        <p>Мы предоставляем качественные услуги на рынке</p>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="svc-block" onclick="showPage('services')">
+        <div class="svc-block-top">
+          <div class="svc-dot"></div>
+          <h3>Производство</h3>
+        </div>
+        <p>С K-Media вы сможете реализовать все свои самые смелые идеи и не бояться за результат.</p>
+      </div>
+      <div class="svc-block" onclick="showPage('services')">
+        <div class="svc-block-top">
+          <div class="svc-dot"></div>
+          <h3>Дизайн</h3>
+        </div>
+        <p>Любые рекламные материалы и конструкции начинаются с дизайна.</p>
+      </div>
+      <div class="svc-block" onclick="showPage('services')">
+        <div class="svc-block-top">
+          <div class="svc-dot"></div>
+          <h3>Реклама в кинотеатрах</h3>
+        </div>
+        <p>Реклама в кинотеатрах — это важный канал продвижения любого проекта.</p>
+      </div>
+      <div class="svc-block" onclick="showPage('services')">
+        <div class="svc-block-top">
+          <div class="svc-dot"></div>
+          <h3>Мероприятия</h3>
+        </div>
+        <p>Мы проведём мероприятие на высшем уровне, чтобы контакт с каждым посетителем был максимально эффективным.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="#" class="footer-logo" onclick="showPage('home');return false;">K-MEDIA</a>
+    <span class="footer-copy">© 2016–2026 Рекламное агентство K-Media</span>
+    <ul class="footer-nav">
+      <li><a href="#" onclick="showPage('about');return false;">О компании</a></li>
+      <li><a href="#" onclick="showPage('services');return false;">Услуги</a></li>
+      <li><a href="#" onclick="showPage('projects');return false;">Проекты</a></li>
+      <li><a href="#" onclick="showPage('contact');return false;">Контакты</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="page-eyebrow">О компании</div>
+    <h1>Рекламное агентство полного цикла</h1>
+    <p>Более десяти лет мы помогаем брендам находить свою аудиторию — через кино, события, цифровые каналы и нестандартные решения.</p>
+  </div>
+  <div class="about-body">
+    <div class="about-cols">
+      <div class="about-text">
+        <p>K-Media — рекламное агентство, которое берёт проект целиком: от первоначальной идеи до финального размещения и отчётности. Клиент не должен думать о том, кто за что отвечает — мы выстраиваем весь процесс изнутри.</p>
+        <p>За годы работы мы убедились в одном: хорошая реклама — это не красивая картинка. Это точное попадание нужного сообщения к нужному человеку в нужный момент. Именно вокруг этого принципа построена вся наша работа.</p>
+        <p>Мы работаем с компаниями разного масштаба — от локального бизнеса до федеральных запусков. Под каждого думаем отдельно, без шаблонных решений.</p>
+        <p>Одно из наших ключевых направлений — реклама в кинотеатрах. Мы знаем этот канал досконально: понимаем, как работает аудитория в зале, как строить присутствие бренда на экране и как это отражается на результате.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="num">10+</div>
+          <div class="lbl">лет на рынке</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">200+</div>
+          <div class="lbl">реализованных проектов</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">50+</div>
+          <div class="lbl">постоянных клиентов</div>
+        </div>
+        <div class="stat-box">
+          <div class="num" style="font-size:28px;line-height:1.2">Полный<br>цикл</div>
+          <div class="lbl">от идеи до эфира</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <a href="#" class="footer-logo" onclick="showPage('home');return false;">K-MEDIA</a>
+    <span class="footer-copy">© 2016–2026 Рекламное агентство K-Media</span>
+    <ul class="footer-nav">
+      <li><a href="#" onclick="showPage('services');return false;">Услуги</a></li>
+      <li><a href="#" onclick="showPage('projects');return false;">Проекты</a></li>
+      <li><a href="#" onclick="showPage('contact');return false;">Контакты</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<div class="page" id="page-services">
+  <div class="services-hero">
+    <div class="page-eyebrow">Услуги</div>
+    <h1>Что мы умеем делать хорошо</h1>
+    <p>Мы предоставляем качественные услуги на рынке рекламы — каждое направление закрыто собственной экспертизой и командой.</p>
+  </div>
+  <div class="services-body">
+    <div class="accordion-item open">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">01</span><span class="acc-title">Реклама в кинотеатрах</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>Реклама в кинотеатрах — это важный канал продвижения любого проекта. Зритель в зале сосредоточен, не отвлекается на телефон, и воспринимает сообщение в наиболее благоприятном эмоциональном контексте.</p>
+        <p>Мы работаем с федеральными кинотеатральными сетями и региональными площадками. Подбираем релевантную аудиторию, согласовываем размещение под конкретный фильм или период, контролируем выход материалов на экран.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">02</span><span class="acc-title">Производство</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>С K-Media вы сможете реализовать все свои самые смелые идеи и не беспокоиться за результат. Мы занимаемся производством рекламных материалов любой сложности — видеоролики, аудиоспоты, графика, полиграфия, нестандартные конструкции.</p>
+        <p>Производственный процесс выстроен так, чтобы каждый этап был прозрачным: от брифинга и концепции до финального согласования и сдачи материала.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">03</span><span class="acc-title">Мероприятия</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>Мы проведём мероприятие на высшем уровне, чтобы контакт с каждым посетителем был максимально эффективным. Кинопремьеры, пресс-показы, корпоративные события, промо-активации.</p>
+        <p>Берём на себя весь цикл: концепция, площадка, логистика, подрядчики, коммуникация с гостями, пресс-сопровождение.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">04</span><span class="acc-title">Digital маркетинг</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>Комплексное продвижение в цифровых каналах: таргетированная реклама, контент-стратегия, работа с лидерами мнений, медийное размещение. Настраиваем кампании под конкретные бизнес-задачи.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">05</span><span class="acc-title">Кросс-промо и продакт-плейсмент</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>Интеграция бренда в кино- и медиапродукты, совместные акции с другими компаниями, перекрёстное продвижение. Инструмент, который работает нативно — без ощущения навязанной рекламы.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">06</span><span class="acc-title">Дизайн</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>Любые рекламные материалы и конструкции начинаются с дизайна. Мы разрабатываем визуальные концепции, которые работают как в цифровых, так и в физических пространствах.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">07</span><span class="acc-title">PR и информационная поддержка</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>Формируем присутствие бренда в информационном поле: работа с редакциями, организация пресс-мероприятий, подготовка материалов для СМИ.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">08</span><span class="acc-title">Медиапланирование</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>Разрабатываем медиаплан под задачи клиента: выбор каналов, распределение бюджета, расчёт охватов и частоты контакта.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">09</span><span class="acc-title">Логистика рекламных материалов</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>Организуем доставку, хранение и распределение рекламных материалов по всей сети — кинотеатры, торговые центры, точки продаж.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAcc(this)">
+        <div class="acc-left"><span class="acc-num">10</span><span class="acc-title">Контроль размещения рекламы</span></div>
+        <div class="acc-arrow">+</div>
+      </button>
+      <div class="accordion-body">
+        <p>Проверяем, что реклама размещена так, как договорились — в нужное время, на нужных позициях. Предоставляем фотоотчёты и сводные данные по каждому размещению.</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <a href="#" class="footer-logo" onclick="showPage('home');return false;">K-MEDIA</a>
+    <span class="footer-copy">© 2016–2026 Рекламное агентство K-Media</span>
+    <ul class="footer-nav">
+      <li><a href="#" onclick="showPage('about');return false;">О компании</a></li>
+      <li><a href="#" onclick="showPage('projects');return false;">Проекты</a></li>
+      <li><a href="#" onclick="showPage('contact');return false;">Контакты</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ===== PROJECTS ===== -->
+<div class="page" id="page-projects">
+  <div class="projects-hero">
+    <div class="page-eyebrow">Проекты</div>
+    <h1>Наши работы</h1>
+    <p>Избранные проекты, которые мы реализовали для наших клиентов.</p>
+  </div>
+  <div class="carousel-section">
+    <div class="carousel-header">
+      <span>Рекламные кампании</span>
+      <div class="carousel-btns">
+        <button class="cbtn" onclick="moveCarousel(-1)">&#8592;</button>
+        <button class="cbtn" onclick="moveCarousel(1)">&#8594;</button>
+      </div>
+    </div>
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="carousel">
+
+        <div class="poster-card">
+          <div class="poster-badge">В прокате</div>
+          <svg class="poster-svg" viewBox="0 0 230 345" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d2240"/><stop offset="100%" stop-color="#1e5a9e"/></linearGradient></defs>
+            <rect width="230" height="345" fill="url(#g1)"/>
+            <circle cx="115" cy="124" r="62" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="34"/>
+            <circle cx="115" cy="124" r="30" fill="rgba(255,255,255,0.15)"/>
+            <text x="115" y="232" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="20" font-weight="bold" letter-spacing="2">СЕВЕРНЫЙ</text>
+            <text x="115" y="256" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="20" font-weight="bold" letter-spacing="2">ВЕТЕР</text>
+            <text x="115" y="282" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="Arial" font-size="9" letter-spacing="3">ПОЛНЫЙ МЕТР · 2024</text>
+            <text x="115" y="318" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Arial" font-size="9">Выход — 14 февраля</text>
+          </svg>
+          <div class="poster-info">
+            <div class="release">Выход 14 февраля</div>
+            <h3>«Северный ветер»</h3>
+            <p>Рекламная кампания в кинотеатрах Москвы и Санкт-Петербурга. 420 000 зрителей.</p>
+          </div>
+        </div>
+
+        <div class="poster-card">
+          <svg class="poster-svg" viewBox="0 0 230 345" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#160828"/><stop offset="100%" stop-color="#5a2490"/></linearGradient></defs>
+            <rect width="230" height="345" fill="url(#g2)"/>
+            <rect x="55" y="44" width="120" height="160" rx="3" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <rect x="72" y="60" width="86" height="128" fill="rgba(255,255,255,0.05)"/>
+            <polygon points="115,90 140,130 90,130" fill="rgba(255,255,255,0.6)"/>
+            <text x="115" y="240" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="18" font-weight="bold" letter-spacing="3">ИМПУЛЬС</text>
+            <text x="115" y="265" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="Arial" font-size="9" letter-spacing="2">ДОКУМЕНТАЛЬНЫЙ</text>
+            <text x="115" y="318" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Arial" font-size="9">Выход — 1 апреля</text>
+          </svg>
+          <div class="poster-info">
+            <div class="release">Выход 1 апреля</div>
+            <h3>«Импульс»</h3>
+            <p>Кросс-промо и продакт-плейсмент для технологического бренда. 18 городов.</p>
+          </div>
+        </div>
+
+        <div class="poster-card">
+          <div class="poster-badge">Завершён</div>
+          <svg class="poster-svg" viewBox="0 0 230 345" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#102210"/><stop offset="100%" stop-color="#1e5e26"/></linearGradient></defs>
+            <rect width="230" height="345" fill="url(#g3)"/>
+            <line x1="115" y1="30" x2="115" y2="200" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="35" y1="115" x2="195" y2="115" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <circle cx="115" cy="115" r="50" fill="none" stroke="rgba(255,255,255,0.17)" stroke-width="1.5"/>
+            <circle cx="115" cy="115" r="18" fill="rgba(255,255,255,0.22)"/>
+            <text x="115" y="238" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="17" font-weight="bold" letter-spacing="1">ГОРИЗОНТ</text>
+            <text x="115" y="260" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Arial" font-size="11">2024</text>
+            <text x="115" y="282" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="Arial" font-size="9" letter-spacing="2">АНИМАЦИЯ</text>
+            <text x="115" y="318" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Arial" font-size="9">Выход — 7 ноября</text>
+          </svg>
+          <div class="poster-info">
+            <div class="release">Выход 7 ноября</div>
+            <h3>«Горизонт»</h3>
+            <p>Полный цикл рекламной поддержки анимационного фильма.</p>
+          </div>
+        </div>
+
+        <div class="poster-card">
+          <svg class="poster-svg" viewBox="0 0 230 345" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g4" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#220808"/><stop offset="100%" stop-color="#7a1414"/></linearGradient></defs>
+            <rect width="230" height="345" fill="url(#g4)"/>
+            <rect x="52" y="38" width="126" height="168" rx="2" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <rect x="68" y="54" width="94" height="136" fill="rgba(255,255,255,0.04)"/>
+            <text x="115" y="140" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-family="Georgia,serif" font-size="60" font-weight="bold">I</text>
+            <text x="115" y="242" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="17" font-weight="bold" letter-spacing="2">ПОСЛЕДНИЙ</text>
+            <text x="115" y="264" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="17" font-weight="bold" letter-spacing="2">СЕАНС</text>
+            <text x="115" y="318" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Arial" font-size="9">Выход — 29 сентября</text>
+          </svg>
+          <div class="poster-info">
+            <div class="release">Выход 29 сентября</div>
+            <h3>«Последний сеанс»</h3>
+            <p>Размещение в 200+ кинотеатрах России. Медиапланирование и контроль.</p>
+          </div>
+        </div>
+
+        <div class="poster-card">
+          <svg class="poster-svg" viewBox="0 0 230 345" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#101820"/><stop offset="100%" stop-color="#1c2e40"/></linearGradient></defs>
+            <rect width="230" height="345" fill="url(#g5)"/>
+            <circle cx="115" cy="108" r="54" fill="none" stroke="rgba(255,190,60,0.25)" stroke-width="18"/>
+            <circle cx="115" cy="108" r="7" fill="rgba(255,190,60,0.65)"/>
+            <text x="115" y="214" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="18" font-weight="bold" letter-spacing="1">ПОЛЯРНАЯ</text>
+            <text x="115" y="238" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="18" font-weight="bold" letter-spacing="1">ЗВЕЗДА</text>
+            <text x="115" y="265" text-anchor="middle" fill="rgba(255,190,60,0.65)" font-family="Arial" font-size="9" letter-spacing="3">ПРИКЛЮЧЕНИЯ</text>
+            <text x="115" y="318" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="Arial" font-size="9">Выход — 23 декабря</text>
+          </svg>
+          <div class="poster-info">
+            <div class="release">Выход 23 декабря</div>
+            <h3>«Полярная звезда»</h3>
+            <p>Digital-кампания и брендирование фойе к новогоднему прокату.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer>
+    <a href="#" class="footer-logo" onclick="showPage('home');return false;">K-MEDIA</a>
+    <span class="footer-copy">© 2016–2026 Рекламное агентство K-Media</span>
+    <ul class="footer-nav">
+      <li><a href="#" onclick="showPage('about');return false;">О компании</a></li>
+      <li><a href="#" onclick="showPage('services');return false;">Услуги</a></li>
+      <li><a href="#" onclick="showPage('contact');return false;">Контакты</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div class="page" id="page-contact">
+  <div class="contact-page">
+    <div class="page-eyebrow">Контакты</div>
+    <h1>Свяжитесь с нами</h1>
+    <p class="sub">Расскажите о задаче — мы предложим решение и ответим в течение рабочего дня.</p>
+
+    <div class="contact-cols">
+      <div>
+        <div class="cinfo-list">
+          <a href="tel:+74993944913" class="cinfo-item">
+            <div class="cinfo-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+            <div><div class="cinfo-lbl">Телефон</div><div class="cinfo-val">+7 499 394-49-13</div></div>
+          </a>
+          <a href="mailto:hello@k-media.pro" class="cinfo-item">
+            <div class="cinfo-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+            <div><div class="cinfo-lbl">Email</div><div class="cinfo-val">hello@k-media.pro</div></div>
+          </a>
+          <div class="cinfo-item" style="cursor:default">
+            <div class="cinfo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+            <div><div class="cinfo-lbl">Адрес</div><div class="cinfo-val">Москва, Россия</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-wrap">
+        <div class="frow">
+          <div class="field">
+            <label>Имя</label>
+            <input type="text" placeholder="Как к вам обращаться?">
+          </div>
+          <div class="field">
+            <label>Компания</label>
+            <input type="text" placeholder="Название компании">
+          </div>
+        </div>
+        <div class="frow">
+          <div class="field">
+            <label>Телефон</label>
+            <input type="tel" placeholder="+7 (___) ___-__-__">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="field">
+          <label>Направление</label>
+          <div class="select-wrap">
+            <select>
+              <option value="" disabled selected>Выберите тип задачи</option>
+              <option>Реклама в кинотеатрах</option>
+              <option>Производство</option>
+              <option>Мероприятия</option>
+              <option>Digital маркетинг</option>
+              <option>Кросс-промо и продакт-плейсмент</option>
+              <option>Дизайн</option>
+              <option>PR и информационная поддержка</option>
+              <option>Медиапланирование</option>
+              <option>Логистика рекламных материалов</option>
+              <option>Другое</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Описание задачи</label>
+          <textarea placeholder="Расскажите о проекте — что нужно сделать, когда, какие ресурсы есть."></textarea>
+        </div>
+        <div class="field">
+          <label>Приложить файлы</label>
+          <div class="file-upload" id="fileUploadZone">
+            <input type="file" multiple accept="image/*,.pdf,.doc,.docx" onchange="handleFiles(this)">
+            <div class="file-upload-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3E87CB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <p><strong>Перетащите файлы сюда</strong> или нажмите для выбора<br>Фото, PDF, документы — до 10 МБ</p>
+            <div class="file-names" id="fileNames"></div>
+          </div>
+        </div>
+        <div>
+          <button class="btn-primary" style="font-size:15px;padding:15px 36px;">Отправить заявку</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="#" class="footer-logo" onclick="showPage('home');return false;">K-MEDIA</a>
+    <span class="footer-copy">© 2016–2026 Рекламное агентство K-Media</span>
+    <ul class="footer-nav">
+      <li><a href="#" onclick="showPage('about');return false;">О компании</a></li>
+      <li><a href="#" onclick="showPage('services');return false;">Услуги</a></li>
+      <li><a href="#" onclick="showPage('projects');return false;">Проекты</a></li>
+    </ul>
+  </footer>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const nav = document.getElementById('nav-' + name);
+  if (nav) nav.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function toggleAcc(btn) {
+  const item = btn.closest('.accordion-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+let carouselPos = 0;
+function moveCarousel(dir) {
+  const track = document.getElementById('carousel');
+  const cards = track.querySelectorAll('.poster-card');
+  const cardW = 230 + 20;
+  const visible = Math.floor(track.parentElement.offsetWidth / cardW);
+  const max = Math.max(0, cards.length - visible);
+  carouselPos = Math.max(0, Math.min(max, carouselPos + dir));
+  track.style.transform = 'translateX(-' + (carouselPos * cardW) + 'px)';
+}
+
+function handleFiles(input) {
+  const names = Array.from(input.files).map(f => f.name);
+  const el = document.getElementById('fileNames');
+  if (names.length > 0) {
+    el.textContent = names.join(', ');
+  } else {
+    el.textContent = '';
+  }
+}
+
+// drag & drop visual feedback
+const zone = document.getElementById('fileUploadZone');
+if (zone) {
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = '#3E87CB'; });
+  zone.addEventListener('dragleave', () => { zone.style.borderColor = ''; });
+  zone.addEventListener('drop', e => { e.preventDefault(); zone.style.borderColor = ''; });
+}
+</script>
+</body>
+</html>
